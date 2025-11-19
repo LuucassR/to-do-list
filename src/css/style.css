@@ -29,33 +29,52 @@ button {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-header .add-todo {
-  margin-top: 20px;
-}
-
 button:hover {
   background-color: #0056b3;
   transform: translateY(-2px);
 }
 
-.to-do {
-  position: relative;
-  bottom: 70px;
+/* ------- PROJECT LIST ------- */
+
+#projects {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.project-item {
+  background: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.active-project {
+  background: #007BFF;
+  color: white;
+}
+
+/* ------- FORM STYLES ------- */
+
+.to-do,
+.project {
   max-width: 400px;
   margin: 0 auto;
 }
 
-.to-do form {
+.to-do form,
+.project form {
   display: flex;
   flex-direction: column;
-  width: auto;
   gap: 15px;
   align-items: center;
   background-color: #fff;
   padding: 15px;
   border-radius: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  display: flex;
 }
 
 #to-do-list {
@@ -71,45 +90,22 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
-  transition: transform .2s;
 }
 
-label {
-  text-align: center;
-}
-
-input[type="radio"] {
-  box-shadow: none;
-}
-
-input:focus {
-  transform: translateY(-2px);
-  border: soild 1px #007BFF;
-}
-
-.priority {
-  box-shadow: none;
+.priority,
+.project-priority {
   display: flex;
   gap: 10px;
 }
 
-.priority input:checked {
-  transform: translateY(-2px);
-}
+/* ------- TASK CARDS ------- */
 
 .task-item {
   background: #fff;
   border-radius: 8px;
   padding: 12px 14px;
-  margin: 10px 0;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   transition: transform .12s ease, box-shadow .12s ease;
-  overflow: hidden;
-}
-
-.task-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
 .task-header {
@@ -117,33 +113,27 @@ input:focus {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 8px;
 }
 
-.task-title {
-  font-size: 1.05rem;
-  margin: 0;
-  color: #111827;
+.expand-task {
+  background: none;
+  color: black;
+  font-size: 20px;
+  padding: 0;
 }
 
 .priority-badge {
-  display: inline-block;
   padding: 4px 8px;
   border-radius: 999px;
-  font-size: 0.75rem;
-  text-transform: capitalize;
   color: #fff;
+  font-size: 0.75rem;
 }
 
 .priority-low { background: #10b981; }
 .priority-medium { background: #f59e0b; }
-.priority-high { background: #ef4444; } 
+.priority-high { background: #ef4444; }
 
-.task-body { color: #374151; font-size: 0.95rem; }
-.task-desc { margin: 6px 0; }
-.task-date { margin: 4px 0; color: #6b7280; font-size: 0.85rem; }
-.task-note { margin-top: 8px; font-size: 0. Nine rem; }
-
-.task-body button {
+.task-body {
+  display: none;
   margin-top: 10px;
 }
