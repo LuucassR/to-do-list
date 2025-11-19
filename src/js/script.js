@@ -67,39 +67,77 @@ const TaskManager = (() => {
 
       const task = new Task(title, description, date, priority, note);
 
-      addTaskToList(task);  
+      addTaskToList(task);
       form.reset();
       ocultForm();
     });
   };
 
-function addTaskToList(task) {
+  function addTaskToList(task, save = true) {
     const taskList = document.getElementById("to-do-list");
     const taskItem = document.createElement("div");
     taskItem.classList.add("task-item");
 
     taskItem.innerHTML = `
-      <header class="task-header">
-        <h3 class="task-title">${task.title}</h3>
-        <span class="priority-badge priority-${task.priority}">${task.priority}</span>
-      </header>
+    <header class="task-header">
+      <h3 class="task-title">${task.title}</h3>
+      <span class="priority-badge priority-${task.priority}">${task.priority}</span>
+    </header>
 
-      <div class="task-body">
-        <p class="task-desc">${task.description}</p>
-        <p class="task-date">${task.date}</p>
-        <p class="task-note"><strong>Notes:</strong> ${task.note || "-"}</p>
-      </div>
-    `;
+    <div class="task-body">
+      <p class="task-desc">${task.description}</p>
+      <p class="task-date">${task.date}</p>
+      <p class="task-note"><strong>Notes:</strong> ${task.note || "-"}</p>
+      <button class="delete-task">Delete</button>
+    </div>
+  `;
+
     taskList.appendChild(taskItem);
+
+    // Guardar solo si save es true
+    if (save) {
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.push(task);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    // Botón eliminar
+    const deleteButton = taskItem.querySelector(".delete-task");
+    deleteButton.addEventListener("click", () => {
+      taskItem.remove(); // Quitar del DOM
+      deleteTaskFromStorage(task);
+    });
   }
+
+  function deleteTaskFromStorage(taskToDelete) {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    // Filtrar la tarea que queremos eliminar
+    tasks = tasks.filter(task =>
+      !(task.title === taskToDelete.title &&
+        task.description === taskToDelete.description &&
+        task.date === taskToDelete.date &&
+        task.priority === taskToDelete.priority &&
+        task.note === taskToDelete.note)
+    );
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach(task => addTaskToList(task, false));
+  }
+
+
 
   return {
     createForm,
     showForm,
     createTask,
+    loadTasks,
   };
 })();
 
 TaskManager.showForm();
 TaskManager.createTask();
+TaskManager.loadTasks();
 

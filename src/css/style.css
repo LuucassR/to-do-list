@@ -143,3 +143,7 @@ input:focus {
 .task-desc { margin: 6px 0; }
 .task-date { margin: 4px 0; color: #6b7280; font-size: 0.85rem; }
 .task-note { margin-top: 8px; font-size: 0. Nine rem; }
+
+.task-body button {
+  margin-top: 10px;
+}
