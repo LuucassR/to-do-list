@@ -137,7 +137,8 @@ const TaskManager = (() => {
   };
 })();
 
-TaskManager.showForm();
-TaskManager.createTask();
-TaskManager.loadTasks();
+document.addEventListener("DOMContentLoaded", () => {
+  TaskManager.showForm();
+  TaskManager.loadTasks();
+});
 
